@@ -12,13 +12,22 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   @override
   String selectedCurrency = 'USD';
-  String selectedRate = '?';
+  String selectedBTCRate = '?';
+   String selectedETHRate = '?';
+    String selectedLTCRate = '?';
   Currency currency = Currency();
 
   Future changeRate() async {
-    final rate = await currency.getRate(selectedCurrency);
+    final BTCrate = await currency.getRate(selectedCurrency,'BTC');
+    final ETHrate = await currency.getRate(selectedCurrency,'ETH');
+    final LTCrate = await currency.getRate(selectedCurrency,'LTC');
+
+
+
     setState(() {
-      selectedRate = rate;
+      selectedBTCRate = BTCrate;
+      selectedETHRate = ETHrate;
+      selectedLTCRate = LTCrate;
     });
   }
 
@@ -88,7 +97,49 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = $selectedRate $selectedCurrency',
+                  '1 BTC = $selectedBTCRate $selectedCurrency',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+             Padding(
+            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+            child: Card(
+              color: Colors.lightBlueAccent,
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                child: Text(
+                  '1 ETH = $selectedETHRate $selectedCurrency',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+             Padding(
+            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+            child: Card(
+              color: Colors.lightBlueAccent,
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                child: Text(
+                  '1 LTC = $selectedLTCRate $selectedCurrency',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
